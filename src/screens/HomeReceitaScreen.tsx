@@ -47,6 +47,7 @@ Formatação:
 - Primeira linha: "# <TÍTULO DA RECEITA>"
 - Depois: tempo de preparo, porções, ingredientes em lista e modo de preparo em passos.
 - Se possível, inclua 1 link do YouTube relacionado no final.
+- Não use negritos 
 
 Exemplo de cabeçalho:
 # Lasanha Cremosa de Frango
@@ -147,9 +148,9 @@ const ESTILOS = StyleSheet.create({
     paddingTop: 20,
   },
   header: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "bold",
-    paddingTop: Platform.OS === "android" ? alturaStatusBar : 54,
+    paddingTop: Platform.OS === "android" ? alturaStatusBar : 48,
   },
   form: {
     backgroundColor: "#FFF",
@@ -169,7 +170,7 @@ const ESTILOS = StyleSheet.create({
     marginBottom: 16,
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#FF774B",
     width: "90%",
     borderRadius: 8,
     flexDirection: "row",

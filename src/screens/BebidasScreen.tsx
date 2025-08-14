@@ -1,17 +1,21 @@
 import { useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-  Alert,
-  Keyboard,
-  StyleSheet,
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    ScrollView,
+    ActivityIndicator,
+    Alert,
+    Keyboard,
+    Platform,
+    StatusBar,
+    StyleSheet,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { askGemini, extractTitle } from "../ai";
+
+const alturaStatusBar = StatusBar.currentHeight;
 
 export default function BebidasScreen() {
   const [fruta1, setFruta1] = useState("");
@@ -41,6 +45,7 @@ Formatação:
 # <TÍTULO DA BEBIDA>
 Tempo de preparo, rendimento, ingredientes (lista), modo de preparo (passos).
 Inclua 1 dica de variação e, se possível, 1 link do YouTube no final.
+- Não use negritos 
 `;
 
     try {
@@ -112,7 +117,7 @@ const S = StyleSheet.create({
     alignItems: "center",
     paddingTop: 20,
   },
-  header: { fontSize: 28, fontWeight: "bold" },
+  header: { fontSize: 28, fontWeight: "bold", paddingTop: Platform.OS === "android" ? alturaStatusBar : 48, },
   form: {
     backgroundColor: "#FFF",
     width: "90%",
@@ -129,7 +134,7 @@ const S = StyleSheet.create({
     marginBottom: 12,
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#FC5891",
     width: "90%",
     borderRadius: 8,
     flexDirection: "row",

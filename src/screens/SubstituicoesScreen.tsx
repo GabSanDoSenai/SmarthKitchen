@@ -1,18 +1,21 @@
 import { useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  ActivityIndicator,
-  Alert,
-  Keyboard,
-  StyleSheet,
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    ScrollView,
+    ActivityIndicator,
+    Alert,
+    Keyboard,
+    Platform,
+    StatusBar,
+    StyleSheet,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { askGemini } from "../ai";
 
+const alturaStatusBar = StatusBar.currentHeight;
 export default function SubstituicoesScreen() {
   const [ingrediente, setIngrediente] = useState("");
   const [restricao, setRestricao] = useState(""); // ex.: vegano, sem lactose, sem glúten
@@ -38,6 +41,7 @@ Formatação:
 - Múltiplas opções de substituição com proporções (ex.: 1 xícara -> 3/4 xícara de ...)
 - Observações de sabor/ textura
 - Dicas de uso e possíveis ajustes de receita
+- Não use negritos 
 `;
 
     try {
@@ -100,7 +104,7 @@ const S = StyleSheet.create({
     alignItems: "center",
     paddingTop: 20,
   },
-  header: { fontSize: 28, fontWeight: "bold" },
+  header: { fontSize: 28, fontWeight: "bold", paddingTop: Platform.OS === "android" ? alturaStatusBar : 48,},
   form: {
     backgroundColor: "#FFF",
     width: "90%",
@@ -116,7 +120,7 @@ const S = StyleSheet.create({
     marginBottom: 12,
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#514FFF",
     width: "90%",
     borderRadius: 8,
     flexDirection: "row",

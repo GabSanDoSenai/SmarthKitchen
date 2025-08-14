@@ -8,16 +8,21 @@ import {
   ActivityIndicator,
   Alert,
   Keyboard,
+  Platform,
+  StatusBar,
   StyleSheet,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { askGemini } from "../ai";
 
+const alturaStatusBar = StatusBar.currentHeight;
 export default function MarmitasScreen() {
   const [preferencias, setPreferencias] = useState("");
   const [dias, setDias] = useState("5");
   const [load, setLoad] = useState(false);
   const [plano, setPlano] = useState("");
+
+ 
 
   async function gerarPlano() {
     if (!dias) {
@@ -38,6 +43,7 @@ Formatação por dia:
 - Lista de ingredientes
 - Modo de preparo (resumo)
 - Dica de armazenamento
+- Não use negritos 
 
 Se possível, inclua 1 link do YouTube com preparo similar no final do plano.
 `;
@@ -97,7 +103,11 @@ const S = StyleSheet.create({
     alignItems: "center",
     paddingTop: 20,
   },
-  header: { fontSize: 28, fontWeight: "bold" },
+  header: {
+    fontSize: 28,
+    fontWeight: "bold",
+    paddingTop: Platform.OS === "android" ? alturaStatusBar : 48,
+  },
   form: {
     backgroundColor: "#FFF",
     width: "90%",
@@ -113,7 +123,7 @@ const S = StyleSheet.create({
     marginBottom: 12,
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#00DB2A",
     width: "90%",
     borderRadius: 8,
     flexDirection: "row",
